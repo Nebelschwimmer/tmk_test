@@ -1,0 +1,21 @@
+{% extends 'app/base.html.twig' %}
+
+{% block body %}
+
+<div class="card">
+<div class="card-header w-100 d-flex justify-content-between">
+    <h5 class="card-title">{{ article.title}}</h5>
+    <a href="{{ path('app_frontpage') }}"> <button type="button" class="btn btn-secondary">Вернуться к списку</button></a>
+</div>
+    <div class="card-body">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Дата создания: {{ article.createdAt}}</li>
+        <li class="list-group-item">Просмотры: {{ article.views}}</li>
+        <li class="list-group-item">Статус: {{ article.status}}</li>
+    </ul>
+        <p class="card-text p-3">Описание: {{ article.description}}</p>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,5 +1,54 @@
 {% extends 'app/base.html.twig' %}
 
 {% block body %}
-    <h3>Теперь осталось сделать тестовое задание :)</h3>
+  <div class="w-100 d-flex justify-content-between p-2">
+    <h4 class="text-primary">Статьи</h4>
+  <button id="db-seed-btn" type="button" class="btn btn-primary">Создать случайные</button>
+  </div>
+  <table class="table">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Статус</th>
+            <th>Просмотры</th>
+            <th>Дата публикации</th>
+        </tr>
+    </thead>
+    <tbody>
+   {% if articles is not empty %}
+    {% for article in articles %}
+        <tr>
+            <td>
+                <a href="{{ path('app_article', {slug: article.slug}) }}">{{ article.title }}</a>
+            </td>
+            <td>{{ article.status }}</td>
+            <td>{{ article.views }}</td>
+            <td>{{ article.createdAt|date('d.m.Y H:i') }}</td>
+        </tr>
+    {% endfor %}
+    {% else %}
+        <tr class="text-center">
+            <td colspan="4">Нет статей для отображения</td>
+        </tr>
+    {% endif %}
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block body_javascripts %}
+<script>
+(function() {
+        const URLS = {
+            seedURL: "{{ path('db_seed') }}",
+        }
+    document.addEventListener("DOMContentLoaded", () => {
+        const dbSeedBtn = document.getElementById('db-seed-btn');
+        dbSeedBtn.addEventListener('click', async () => {
+            await fetch(URLS.seedURL).then(() => {
+                location.reload();
+            });
+        })
+    })
+})()
+</script>
 {% endblock %}
