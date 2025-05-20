@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Event\Article;
+namespace App\Application\EventListener;
 
 use App\Domain\Entity\Article\Article;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -26,7 +26,7 @@ class ArticleEventListener
 
     public function generateSlug(Article $article): string
     {
-        $slug = $this->slugger->slug($article->getTitle())->lower() . "_" . uniqid();
+        $slug = $this->slugger->slug($article->getTitle())->lower() . uniqid("_");
         return $slug;
     }
 }

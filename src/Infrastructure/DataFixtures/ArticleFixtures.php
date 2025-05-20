@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataFixtures;
+namespace App\Infrastructure\DataFixtures;
 
 use App\Domain\Enum\Status;
 use Doctrine\Bundle\FixturesBundle\Fixture;
